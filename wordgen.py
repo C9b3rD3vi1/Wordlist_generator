@@ -1,13 +1,15 @@
+
+import enchant
 import itertools
 
-characters = 'abcdefghijklmnopqrstuvwxyz1234567890'
+chars = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
 min_length = 3
 max_length = 10
 
 
 # wordlist generator function
-def wordgen(characters, min_length=1, max_length=3):
+def wordgen(chars, min_length=1, max_length=3):
     """
     Generate a wordlist based on the provided character set and word length range.
 
@@ -17,7 +19,7 @@ def wordgen(characters, min_length=1, max_length=3):
     :yield: Words generated based on the criteria.
     """
     for length in range(min_length, max_length + 1):
-        for word in itertools.product(characters, repeat=length):
+        for word in itertools.product(chars, repeat=length):
             yield ''.join(word)
 
 
@@ -37,7 +39,7 @@ if __name__ == '__main__':
     print('Words within length range {} to {}:'.format(min_length, max_length))
     print('-------------------------')
 
-    for word in wordgen(characters, min_length, max_length):
+    for word in wordgen(chars, min_length, max_length):
         print(word)
     
     # Uncomment to save the wordlist to a file
