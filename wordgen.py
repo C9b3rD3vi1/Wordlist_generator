@@ -3,7 +3,7 @@ import itertools
 characters = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
 min_length = 3
-max_length = 6
+max_length = 10
 
 
 # wordlist generator function
