@@ -3,11 +3,12 @@ import sys
 import os
 import enchant
 import itertools
+from colorama import Fore, Back, Style
 
 chars = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
 # min and max word length 
-min_length = 3
+min_length = 122
 max_length = 10
 
 # wordlist file path to save the generated wordlist
@@ -89,7 +90,7 @@ if __name__ == '__main__':
     print('Words within length range {} to {}:'.format(min_length, max_length))
     print('-------------------------')
 
-    for word in wordgen(chars, min_length, max_length):
+    for word in CreateWordList(chars, min_length, max_length):
         print(valid_words)
     
     # Uncomment to save the wordlist to a file
