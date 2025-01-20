@@ -61,7 +61,7 @@ def wordgen_save(file_path):
         print('File does not exist. Creating a new file.')  
 
         with open(file_path, 'w') as f:
-            for word in wordgen():
+            for word in CreateWordList():
                 f.write(valid_words + '\n')
     else:
         print('File already exists.')
@@ -73,7 +73,7 @@ def wordgen_save(file_path):
         if choice.lower() == 'y':
             print('Overwriting the file.')
             with open(file_path, 'w') as f:
-                for word in wordgen():
+                for word in CreateWordList():
                     f.write(valid_words + '\n')
         else:
             print('File not overwritten.')
