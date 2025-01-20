@@ -1,4 +1,5 @@
 
+import sys
 import os
 import enchant
 import itertools
@@ -20,7 +21,7 @@ valid_words = set()
 
 
 # wordlist generator function
-def wordgen(chars, min_length=1, max_length=3):
+def CreateWordList(chars, min_length=1, max_length=3):
     """
     Generate a wordlist based on the provided character set and word length range.
 
@@ -29,6 +30,13 @@ def wordgen(chars, min_length=1, max_length=3):
     :param max_length: Maximum word length.
     :yield: Words generated based on the criteria.
     """
+
+    # Check if min_length is greater than max_length and raise an error if so.
+    if min_length > max_length:
+        print ("[!] Please `min_length` must smaller or same as with `max_length`")
+        sys.exit()
+
+    # Generate words based on the character set and word length range.
     for length in range(min_length, max_length + 1):
         for word in itertools.product(chars, repeat=length):
             yield ''.join(word)
