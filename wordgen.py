@@ -5,14 +5,17 @@ import itertools
 
 chars = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
+# min and max word length 
 min_length = 3
 max_length = 10
 
+# wordlist file path to save the generated wordlist
 file_path = 'wordlist.txt'
 
 # enchant dictionary
 dictionary = enchant.Dict("en_US")
 
+# set to store valid words
 valid_words = set()
 
 
@@ -38,7 +41,7 @@ def wordgen(chars, min_length=1, max_length=3):
 
 
 # save wordlist to file
-def wordgen_save():
+def wordgen_save(file_path):
 
     """
     Check if the file exists; if not, create it.
@@ -51,7 +54,7 @@ def wordgen_save():
 
         with open(file_path, 'w') as f:
             for word in wordgen():
-                f.write(word + '\n')
+                f.write(valid_words + '\n')
     else:
         print('File already exists.')
         print('Do you want to overwrite the file? (y/n)')
@@ -82,4 +85,4 @@ if __name__ == '__main__':
         print(valid_words)
     
     # Uncomment to save the wordlist to a file
-    wordgen_save()
+    wordgen_save(file_path)
