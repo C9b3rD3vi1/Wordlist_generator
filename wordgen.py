@@ -1,6 +1,7 @@
 
 import sys
 import os
+import time
 import enchant
 import itertools
 from colorama import Fore, Back, Style
@@ -76,6 +77,10 @@ def wordgen_save(file_path, chars, min_length, max_length):
 if __name__ == '__main__':
 
     print(Fore.BLUE + f"Generating valid words from length {min_length} to {max_length}..." + Style.RESET_ALL)
+
+    # sleep for 6 second
+    time.sleep(6)
+
     for word in CreateWordList(chars, min_length, max_length):
         print(word)  # Print valid words to the console
 
