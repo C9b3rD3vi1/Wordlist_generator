@@ -1,4 +1,8 @@
 
+# Wordlist generator script
+# This script generates a wordlist based on the provided character set and word length range.
+
+
 import sys
 import os
 import time
