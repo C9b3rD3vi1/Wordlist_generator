@@ -64,6 +64,7 @@ def wordgen_save(file_path, chars, min_length, max_length):
         if choice != 'y':
             print(Fore.RED + "Exiting without overwriting." + Style.RESET_ALL)
             return
+    
 
     # Create or overwrite the file
     print(Fore.GREEN + "Saving valid words to the file..." + Style.RESET_ALL)
