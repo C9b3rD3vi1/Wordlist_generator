@@ -101,6 +101,12 @@ if __name__ == '__main__':
     file_format = input("Your choice (text, json, csv): ").strip().lower()
 
     # validate the file format
+    print(Fore.YELLOW + f"Validating file format: {file_format}..." + Style.RESET_ALL)
+
+    # Sleep for 2 seconds
+    time.sleep(2)
+    
+    # Validate the file format
     if file_format not in ['text', 'json', 'csv']:
         print(Fore.RED + "Invalid file format. Exiting..." + Style.RESET_ALL)
         sys.exit()
