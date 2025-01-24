@@ -1,4 +1,3 @@
-
 # Wordlist generator script
 # This script generates a wordlist based on the provided character set and word length range.
 
@@ -9,26 +8,23 @@ import os
 import time
 import enchant
 import itertools
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
-# character set to generate words
+# Character set to generate words
 chars = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
-# min and max word length 
-min_length = 3
-max_length = 10
+# Min and max word length
+min_length = 2
+max_length = 3
 
-# wordlist file path to save the generated wordlist
+# Wordlist file path to save the generated wordlist
 file_path = 'wordlist.txt'
 
-# enchant dictionary
+# Enchant dictionary
 dictionary = enchant.Dict("en_US")
 
-# set to store valid words
-valid_words = set()
 
-
-# wordlist generator function
+# Wordlist generator function
 def CreateWordList(chars, min_length=1, max_length=3):
     """
     Generate a wordlist based on the provided character set and word length range.
@@ -38,13 +34,10 @@ def CreateWordList(chars, min_length=1, max_length=3):
     :param max_length: Maximum word length.
     :yield: Words generated based on the criteria.
     """
-
-    # Check if min_length is greater than max_length and raise an error if so.
     if min_length > max_length:
-        print (Fore.RED + "[!] Please `min_length` must smaller or same as with `max_length`" + Style.RESET_ALL)
+        print(Fore.RED + "[!] `min_length` must be smaller or equal to `max_length`." + Style.RESET_ALL)
         sys.exit()
 
-    # Generate words based on the character set and word length range.
     for length in range(min_length, max_length + 1):
         for word_tuple in itertools.product(chars, repeat=length):
             word = ''.join(word_tuple)
@@ -53,50 +46,53 @@ def CreateWordList(chars, min_length=1, max_length=3):
 
 
 # Save the generated wordlist to a file
-def save_wordlist(word, file_path, file_format='txt',file_name='wordlist' ):
+def save_wordlist(chars, min_length, max_length, file_path, file_format='txt'):
     """
     Save the wordlist to a file in the specified format.
 
-    :param wordlist: List of words to save.
-    :param file_path: Path to the file to save the words.
-    :param file_format: Format to save the file in (e.g., 'text', 'json', 'csv').
+    :param chars: Character set for wordlist generation.
+    :param min_length: Minimum word length.
+    :param max_length: Maximum word length.
+    :param file_path: Path to save the wordlist.
+    :param file_format: File format (e.g., 'text', 'json', 'csv').
     """
     if os.path.exists(file_path):
         print(Fore.YELLOW + "File already exists. Do you want to overwrite it? (y/n)" + Style.RESET_ALL)
-        choice = input().strip().lower()
+        choice = input("Your choice (y/n): ").strip().lower()
         if choice != 'y':
             print(Fore.RED + "Exiting without overwriting." + Style.RESET_ALL)
             return
 
-    # Save the wordlist based on the specified format
     print(Fore.GREEN + f"Saving wordlist to {file_path} in {file_format} format..." + Style.RESET_ALL)
+
+    # Generate the wordlist
+    wordlist = list(CreateWordList(chars, min_length, max_length))
+
+    # Save based on the specified format
     if file_format == 'text':
         with open(file_path, 'w') as f:
-            for word in CreateWordList(chars, min_length, max_length):
-                f.write(word + '\n')
+            f.write('\n'.join(wordlist))
     elif file_format == 'json':
         with open(file_path, 'w') as f:
-            json.dump(CreateWordList, f)
+            json.dump(wordlist, f, indent=4)
     elif file_format == 'csv':
         with open(file_path, 'w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(CreateWordList)
+            for word in wordlist:
+                writer.writerow([word])
+    else:
+        print(Fore.RED + f"Unsupported file format: {file_format}" + Style.RESET_ALL)
+
     print(Fore.GREEN + f"Wordlist saved to {file_path} in {file_format} format." + Style.RESET_ALL)
 
 
+
 # Main function to generate and save the wordlist
-
 if __name__ == '__main__':
-
     print(Fore.BLUE + f"Generating valid words from length {min_length} to {max_length}..." + Style.RESET_ALL)
 
-    # sleep for 6 second
+    # Sleep for 6 seconds
     time.sleep(6)
 
-    #for word in CreateWordList(chars, min_length, max_length):
-        #print(word)  # Print valid words to the console
-
-    # Save to file
-    print(Fore.GREEN + f"Calling the save function ........" + Style.RESET_ALL)
-
-    save_wordlist(file_path, file_format='txt',filename='wordlist' )
+    print(Fore.GREEN + "Calling the save function..." + Style.RESET_ALL)
+    save_wordlist(chars, min_length, max_length, file_path, file_format= 'text')
