@@ -94,5 +94,17 @@ if __name__ == '__main__':
     # Sleep for 6 seconds
     time.sleep(6)
 
+    # Ask the user to enter the desired file format
+    print(Fore.YELLOW + "Enter the file format to save the wordlist (text, json, csv):" + Style.RESET_ALL)
+
+    # Get the file format from the user
+    file_format = input("Your choice (text, json, csv): ").strip().lower()
+
+    # validate the file format
+    if file_format not in ['text', 'json', 'csv']:
+        print(Fore.RED + "Invalid file format. Exiting..." + Style.RESET_ALL)
+        sys.exit()
+        
+
     print(Fore.GREEN + "Calling the save function..." + Style.RESET_ALL)
     save_wordlist(chars, min_length, max_length, file_path, file_format= 'text')
