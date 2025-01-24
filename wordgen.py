@@ -18,7 +18,7 @@ min_length = 2
 max_length = 3
 
 # Wordlist file path to save the generated wordlist
-file_path = 'wordlist.txt'
+file_path = 'wordlist'
 
 # Enchant dictionary
 dictionary = enchant.Dict("en_US")
@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
     # Sleep for 2 seconds
     time.sleep(2)
-    
+
     # Validate the file format
     if file_format not in ['text', 'json', 'csv']:
         print(Fore.RED + "Invalid file format. Exiting..." + Style.RESET_ALL)
@@ -113,4 +113,4 @@ if __name__ == '__main__':
         
 
     print(Fore.GREEN + "Calling the save function..." + Style.RESET_ALL)
-    save_wordlist(chars, min_length, max_length, file_path, file_format= 'text')
+    save_wordlist(chars, min_length, max_length, file_path, file_format)
