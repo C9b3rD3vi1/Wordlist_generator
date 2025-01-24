@@ -2,7 +2,8 @@
 # Wordlist generator script
 # This script generates a wordlist based on the provided character set and word length range.
 
-
+import csv
+import json
 import sys
 import os
 import time
@@ -51,16 +52,14 @@ def CreateWordList(chars, min_length=1, max_length=3):
                 yield word
 
 
-
-# save wordlist to file
-def wordgen_save(file_path, chars, min_length, max_length):
+# Save the generated wordlist to a file
+def save_wordlist(word, file_path, file_format='txt',file_name='wordlist' ):
     """
-    Save valid words to a file.
+    Save the wordlist to a file in the specified format.
 
+    :param wordlist: List of words to save.
     :param file_path: Path to the file to save the words.
-    :param chars: Character set for generating words.
-    :param min_length: Minimum word length.
-    :param max_length: Maximum word length.
+    :param file_format: Format to save the file in (e.g., 'text', 'json', 'csv').
     """
     if os.path.exists(file_path):
         print(Fore.YELLOW + "File already exists. Do you want to overwrite it? (y/n)" + Style.RESET_ALL)
@@ -68,16 +67,24 @@ def wordgen_save(file_path, chars, min_length, max_length):
         if choice != 'y':
             print(Fore.RED + "Exiting without overwriting." + Style.RESET_ALL)
             return
-    
 
-    # Create or overwrite the file
-    print(Fore.GREEN + "Saving valid words to the file..." + Style.RESET_ALL)
-    with open(file_path, 'w') as f:
-        for word in CreateWordList(chars, min_length, max_length):
-            f.write(word + '\n')
-    print(Fore.GREEN + f"Wordlist saved to {file_path}." + Style.RESET_ALL)
-        
-            
+    # Save the wordlist based on the specified format
+    print(Fore.GREEN + f"Saving wordlist to {file_path} in {file_format} format..." + Style.RESET_ALL)
+    if file_format == 'text':
+        with open(file_path, 'w') as f:
+            for word in CreateWordList(chars, min_length, max_length):
+                f.write(word + '\n')
+    elif file_format == 'json':
+        with open(file_path, 'w') as f:
+            json.dump(CreateWordList, f)
+    elif file_format == 'csv':
+        with open(file_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(CreateWordList)
+    print(Fore.GREEN + f"Wordlist saved to {file_path} in {file_format} format." + Style.RESET_ALL)
+
+
+# Main function to generate and save the wordlist
 
 if __name__ == '__main__':
 
@@ -86,8 +93,10 @@ if __name__ == '__main__':
     # sleep for 6 second
     time.sleep(6)
 
-    for word in CreateWordList(chars, min_length, max_length):
-        print(word)  # Print valid words to the console
+    #for word in CreateWordList(chars, min_length, max_length):
+        #print(word)  # Print valid words to the console
 
     # Save to file
-    wordgen_save(file_path, chars, min_length, max_length)
+    print(Fore.GREEN + f"Calling the save function ........" + Style.RESET_ALL)
+
+    save_wordlist(file_path, file_format='txt',filename='wordlist' )
