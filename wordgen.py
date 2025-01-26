@@ -6,12 +6,13 @@ import sys
 import csv
 import json
 import time
+import string
 import enchant
 import itertools
 from colorama import Fore, Style
 
 # Character set to generate words
-chars = 'abcdefghijklmnopqrstuvwxyz1234567890'
+chars = string.ascii_letters + string.digits + "!@#$%^&*"
 
 # Min and max word length
 min_length = 2
