@@ -10,6 +10,8 @@ import string
 import enchant
 import itertools
 from colorama import Fore, Style
+from argparse import ArgumentParser
+
 
 # Character set to generate words
 chars = string.ascii_letters + string.digits + "!@#$%^&*"
@@ -88,8 +90,27 @@ def save_wordlist(chars, min_length, max_length, file_path, file_format='txt'):
 
 
 
+# Parse the command-line arguments
+def parse_args():
+    """
+    Parse the command-line arguments.
+
+    :return: The parsed arguments.
+    """
+    parser = ArgumentParser(description="Wordlist generator script")
+    parser.add_argument('-c', '--chars', type=str, default=chars, help="Character set for wordlist generation.")
+    parser.add_argument('-min', '--min_length', type=int, default=min_length, help="Minimum word length.")
+    parser.add_argument('-max', '--max_length', type=int, default=max_length, help="Maximum word length.")
+    parser.add_argument('-f', '--file_path', type=str, default=file_path, help="Path to save the wordlist.")
+    return parser.parse_args()
+
+
+
 # Main function to generate and save the wordlist
 if __name__ == '__main__':
+    # Parse the command-line arguments
+    parse_args()
+    
     print(Fore.BLUE + f"Generating valid words from length {min_length} to {max_length}..." + Style.RESET_ALL)
 
     # Sleep for 6 seconds
