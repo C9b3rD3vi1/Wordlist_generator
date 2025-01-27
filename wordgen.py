@@ -102,15 +102,19 @@ def parse_args():
     parser.add_argument('-min', '--min_length', type=int, default=min_length, help="Minimum word length.")
     parser.add_argument('-max', '--max_length', type=int, default=max_length, help="Maximum word length.")
     parser.add_argument('-f', '--file_path', type=str, default=file_path, help="Path to save the wordlist.")
+    parser.add_argument('-format', '--file_format', type=str, default=file_format, help="File format to save the wordlist.")
+    parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose mode.")
+
     return parser.parse_args()
 
 
 
 # Main function to generate and save the wordlist
+
 if __name__ == '__main__':
     # Parse the command-line arguments
     parse_args()
-    
+
     print(Fore.BLUE + f"Generating valid words from length {min_length} to {max_length}..." + Style.RESET_ALL)
 
     # Sleep for 6 seconds
@@ -120,7 +124,7 @@ if __name__ == '__main__':
     print(Fore.YELLOW + "Enter the file format to save the wordlist (text, json, csv):" + Style.RESET_ALL)
 
     # Get the file format from the user
-    file_format = input("Your choice (text, json, csv): ").strip().lower()
+    file_format = input("Enter file format (text, json, csv): ").strip().lower()
 
     # validate the file format
     print(Fore.YELLOW + f"Validating file format: {file_format}..." + Style.RESET_ALL)
