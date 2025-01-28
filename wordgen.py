@@ -59,6 +59,7 @@ def save_wordlist(chars, min_length, max_length, file_path, file_format='txt'):
     :param file_path: Path to save the wordlist.
     :param file_format: File format (e.g., 'text', 'json', 'csv').
     """
+    # Check if the file already exists
     if os.path.exists(file_path):
         print(Fore.YELLOW + "File already exists. Do you want to overwrite it? (y/n)" + Style.RESET_ALL)
         choice = input("Your choice (y/n): ").strip().lower()
@@ -104,6 +105,7 @@ def parse_args():
     parser.add_argument('-f', '--file_path', type=str, default=file_path, help="Path to save the wordlist.")
     parser.add_argument('-format', '--file_format', type=str, default=file_format, help="File format to save the wordlist.")
     parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose mode.")
+
 
     return parser.parse_args()
 
