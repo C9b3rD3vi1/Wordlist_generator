@@ -18,7 +18,7 @@ chars = string.ascii_letters + string.digits + "!@#$%^&*"
 
 # Min and max word length
 min_length = 2
-max_length = 3
+max_length = 10
 
 # Wordlist file path to save the generated wordlist
 file_path = 'wordlist'
